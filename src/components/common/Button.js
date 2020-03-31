@@ -4,7 +4,7 @@ import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 
-function LoadingButton({
+function BaseButton({
   icon,
   children,
   buttonProps,
@@ -15,12 +15,7 @@ function LoadingButton({
 }) {
   return (
     <Box display="inline-block" position="relative" {...rest}>
-      <Button
-        color={color}
-        variant={variant}
-        type={type}
-        {...buttonProps}
-      >
+      <Button color={color} variant={variant} type={type} {...buttonProps}>
         {icon && <Box component={Icon} children={icon} mr={1} />}
         {children}
       </Button>
@@ -28,7 +23,7 @@ function LoadingButton({
   );
 }
 
-LoadingButton.propTypes = {
+BaseButton.propTypes = {
   icon: PropTypes.string,
   children: PropTypes.node,
   variant: PropTypes.string,
@@ -37,10 +32,10 @@ LoadingButton.propTypes = {
   buttonProps: PropTypes.object
 };
 
-LoadingButton.defaultProps = {
+BaseButton.defaultProps = {
   variant: 'contained',
   color: 'primary',
   buttonProps: {}
 };
 
-export default LoadingButton;
+export default BaseButton;

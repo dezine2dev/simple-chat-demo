@@ -3,15 +3,23 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Box from '@material-ui/core/Box';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
-
-import AppActions from '../redux/AppRedux';
-import { Button } from '../components/common';
-import MainLayout from '../containers/layout/MainLayout';
+import { makeStyles } from '@material-ui/core/styles';
+import AppActions from '../../redux/AppRedux';
+import { Button } from '../../components/common';
+import MainLayout from '../../containers/layout/MainLayout';
 import MsgBox from './msgBox';
-import './chat.css';
+
+const useStyles = makeStyles(theme => ({
+  textarea: {
+    width: '100%',
+    minHeight: theme.spacing(4),
+    fontSize: theme.spacing(3)
+  }
+}));
 
 function ChatPage({ msgs, sendMsg }) {
   const [msg, setMsg] = useState();
+  const classes = useStyles();
 
   const handleMsgClick = () => {
     if (msg) sendMsg(msg);
@@ -25,7 +33,7 @@ function ChatPage({ msgs, sendMsg }) {
         borderColor="grey.300"
         bgcolor="white"
         flex={1}
-        overflow="scroll"
+        overflow="auto"
       >
         {msgs &&
           Boolean(msgs.length) &&
@@ -49,7 +57,7 @@ function ChatPage({ msgs, sendMsg }) {
             width={1}
             value={msg}
             onChange={e => setMsg(e.target.value)}
-            className="msg-textarea"
+            className={classes.textarea}
           />
         </Box>
         <Button ml={3} my={1} onClick={handleMsgClick}>

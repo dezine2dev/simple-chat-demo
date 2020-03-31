@@ -24,7 +24,7 @@ export const INITIAL_STATE = {
 const setMsgs = (state, { msg }) => {
   const newMsg = {
     id: shortid.generate(),
-    timestamp: Date.now(),
+    timestamp: Date.now(), // timestamp for future usage like sorting, fitlering
     msg
   };
   const extendedMsgs = [...state.msgs, newMsg];
